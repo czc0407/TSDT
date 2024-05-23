@@ -9,6 +9,13 @@ from selenium.common.exceptions import WebDriverException
 MAX_WAIT = 10
 
 class NewVisitorTest(LiveServerTestCase):
+
+    def setUp(self):
+        self.browser = webdriver.Chrome()
+    
+    def tearDown(self):
+        self.browser.quit()
+
     def test_layout_and_styling(self):
         #张三访问首页
         self.browser.get(self.live_server_url)
@@ -31,12 +38,6 @@ class NewVisitorTest(LiveServerTestCase):
             512,
             delta=10
         )
-    def setUp(self):
-        self.browser = webdriver.Chrome()
-    
-    def tearDown(self):
-        self.browser.quit()
-
     def wait_for_row_in_list_table(self, row_text):
         start_time = time.time()
         while True:
